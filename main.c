@@ -23,6 +23,7 @@
 #include <stdlib.h> 
 #include <string.h>
 #include "mathf.h"
+#include "io.h"
 
 
 /*! \brief the main function
@@ -34,11 +35,27 @@
 int main() {
 
 	/* setting all the parameters */
-	float fcoeff[4] = {-10.0,1.0,0.0,2.0};	/* the polynomial  f(x)=-10+x-2(x^3)*/
 	float xmin = 0.0; 						/* the integration range */ 
-	float xmax= 5.0; 					
-	int intervals = 500; 					/* number of equally spaced intervals */ 
-	
+	float xmax = 0.0; 					
+	int intervals = 0; 					/* number of equally spaced intervals */ 
+	poly_s polinomio;
+	FILE* fPtr=OpenFile("text.txt");
+	if (fPtr==NULL)
+		return -1;
+
+	int check=ReadConfigFile(fPtr,&polinomio,&xmin,&xmax,&intervals);		//starting reading config file
+
+	if (check==-1)
+	{
+		printf("\n\nERROR _ UNABLE TO READ FILE\n\n");
+		return -1;
+	}
+
+	if (CloseFile(fPtr)==-1)
+	{
+		printf("ERROR CLOSING FILE");
+		return -1;
+	}
 	
 	float integ1, integ2;
 	
@@ -56,7 +73,7 @@ int main() {
 
 	/* to get the value of the polynomial at the different points that are delimiting the intervals */
 	for (i=0; i<=intervals; i++) {
-		fvalues[i] = Polynomial(fcoeff,4,in);
+		fvalues[i] = Polynomial(polinomio,in);
 		in += gap;
 	}
 	
