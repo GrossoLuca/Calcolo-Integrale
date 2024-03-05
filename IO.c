@@ -64,6 +64,12 @@ int ReadConfigFile(FILE* fPtr, poly_s* pf, float* xinf, float* xsup, int* interv
         printf("NULL File Pointer \n");
         return -1;
 	}
+
+	if (pf == NULL) {
+		printf("\n ReadConfigFile - ");
+        printf("NULL Polynomial Pointer \n");
+        return -1;
+	}
 	
 	/*first line of the file: coefficients of the polynom*/
 	if (fgets(str,150,fPtr) != NULL) {
