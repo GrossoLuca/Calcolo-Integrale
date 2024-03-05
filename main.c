@@ -82,17 +82,17 @@ int main() {
 
 	/* to compute the integral according to the rectangular rule */
 	Rectangular(fvalues,intervals+1,gap,&integ1,&integ2);
-	printf("\nRectangular rule - The integral between %f and %f is in the interval: [%f,%f]\n", xmin,xmax,integ1,integ2);
+	printf("\nRectangular rule - The integral between %.2f and %.2f is in the interval: [%.3f,%.3f]\n", xmin,xmax,integ1,integ2);
 	
 	/* to compute the integral according to the trapezoidal rule */
 	integ1 = Trapezoidal(fvalues,intervals+1,gap);
-	printf("\nTrapezoidal rule - The integral between %f and %f is : %f\n", xmin,xmax,integ1);
+	printf("\nTrapezoidal rule - The integral between %.2f and %.2f is : %.3f\n", xmin,xmax,integ1);
 
 	
 	/* deallocation */
 	if (fvalues != NULL)
 		free(fvalues);
-		
+
 	if (polinomio.coeffs!= NULL)
 		free(polinomio.coeffs);
 
