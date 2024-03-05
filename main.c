@@ -92,6 +92,9 @@ int main() {
 	/* deallocation */
 	if (fvalues != NULL)
 		free(fvalues);
+		
+	if (polinomio.coeffs!= NULL)
+		free(polinomio.coeffs);
 
 	return 0;
 }
