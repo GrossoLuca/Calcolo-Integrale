@@ -44,6 +44,8 @@ int CloseFile(FILE* fPtr) {
 		else
 			return 1;
 	}
+	printf("\nCoase File -");
+	printf("NULL POINTER\n");
 	return -1;
 }
 
