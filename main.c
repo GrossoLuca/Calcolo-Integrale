@@ -32,11 +32,11 @@
 	the points delimiting the intervals are defined and then the integration is finalized 
 	
 */
-int main() {
+int main(void) {
 
 	/* setting all the parameters */
-	float xmin = 0.0; 						/* the integration range */ 
-	float xmax = 0.0; 					
+	double xmin = 0.0; 						/* the integration range */ 
+	double xmax = 0.0; 					
 	int intervals = 0; 					/* number of equally spaced intervals */ 
 	poly_s polinomio;
 	FILE* fPtr=OpenFile("text.txt");
@@ -57,15 +57,15 @@ int main() {
 		return -1;
 	}
 	
-	float integ1, integ2;
+	double integ1, integ2;
 	
 	int i; 
-	float in = xmin;
-	float gap = (xmax-xmin)/(float)intervals;
-	float* fvalues = NULL;
+	double in = xmin;
+	double gap = (xmax-xmin)/(double)intervals;
+	double* fvalues = NULL;
 	
 	/* this array will store the (steps+1) values of the polynomial that are delimiting the equally spaced intervals*/
-	fvalues = (float*)malloc(sizeof(float)*(intervals+1));
+	fvalues = (double*)malloc(sizeof(double)*(intervals+1));
 	if (fvalues == NULL) {
 		printf("\nERROR: cannot allocate memory\n");
 		exit(-1);

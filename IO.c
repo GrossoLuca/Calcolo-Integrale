@@ -57,7 +57,7 @@ int CloseFile(FILE* fPtr) {
 	@param xinf pointer to the variable for the number of intervals
 	@return 1 means that everyting is ok, -1 means that something went wrong 
 */
-int ReadConfigFile(FILE* fPtr, poly_s* pf, float* xinf, float* xsup, int* intervals) {
+int ReadConfigFile(FILE* fPtr, poly_s* pf, double* xinf, double* xsup, int* intervals) {
 	
 	char str[STRL]; 
 	int rv;
@@ -93,7 +93,7 @@ int ReadConfigFile(FILE* fPtr, poly_s* pf, float* xinf, float* xsup, int* interv
 	/*second line of the file: interval of integration*/
 	if (fgets(str,STRL,fPtr) != NULL) {
 		str[strcspn(str, "\n")] = 0; /* removing end of line */
-		sscanf(str,"%f %f",xinf,xsup);
+		sscanf(str,"%lf %lf",xinf,xsup);
 	}
 	else {
 		printf("\n ReadConfigFile - ");
@@ -122,7 +122,7 @@ int ReadConfigFile(FILE* fPtr, poly_s* pf, float* xinf, float* xsup, int* interv
 int ParseLine(poly_s* pf, char* str) {
 	
 	int ctr = 0;
-	float* values = NULL; 
+	double* values = NULL; 
 	char copy[STRL];
 	
 	if (str == NULL) {
@@ -140,7 +140,7 @@ int ParseLine(poly_s* pf, char* str) {
 	}
 	
 	/* allocating an array to store the coefficients */
-	values = (float*)malloc(sizeof(float)*ctr);
+	values = (double*)malloc(sizeof(double)*ctr);
 	if (values == NULL) {
 		printf("\n ParseLine - ");
 		printf("\n cannot allocate memory\n");
