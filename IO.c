@@ -7,6 +7,7 @@
 
 
 #include "io.h"
+#define STRL 150
 
 /*! @brief Opens a file in read-text mode
 	@param filePath the path to the file
@@ -56,7 +57,7 @@ int CloseFile(FILE* fPtr) {
 */
 int ReadConfigFile(FILE* fPtr, poly_s* pf, float* xinf, float* xsup, int* intervals) {
 	
-	char str[100]; 
+	char str[STRL]; 
 	int rv;
 	
 	if (fPtr == NULL) {
@@ -72,7 +73,7 @@ int ReadConfigFile(FILE* fPtr, poly_s* pf, float* xinf, float* xsup, int* interv
 	}
 	
 	/*first line of the file: coefficients of the polynom*/
-	if (fgets(str,150,fPtr) != NULL) {
+	if (fgets(str,STRL,fPtr) != NULL) {
 		str[strcspn(str, "\n")] = 0; /* removing end of line */
 		rv= ParseLine(pf,str); 
 		if (rv == -1) {
@@ -88,7 +89,7 @@ int ReadConfigFile(FILE* fPtr, poly_s* pf, float* xinf, float* xsup, int* interv
 	}
 	
 	/*second line of the file: interval of integration*/
-	if (fgets(str,150,fPtr) != NULL) {
+	if (fgets(str,STRL,fPtr) != NULL) {
 		str[strcspn(str, "\n")] = 0; /* removing end of line */
 		sscanf(str,"%f %f",xinf,xsup);
 	}
@@ -99,7 +100,7 @@ int ReadConfigFile(FILE* fPtr, poly_s* pf, float* xinf, float* xsup, int* interv
 	}
 	
 	/*third line of the file: number of subintervals*/
-	if (fgets(str,150,fPtr) != NULL) {
+	if (fgets(str,STRL,fPtr) != NULL) {
 		str[strcspn(str, "\n")] = 0; /* removing end of line */
 		sscanf(str,"%d",intervals);
 	}
@@ -120,7 +121,7 @@ int ParseLine(poly_s* pf, char* str) {
 	
 	int ctr = 0;
 	float* values = NULL; 
-	char copy[150];
+	char copy[STRL];
 	
 	if (str == NULL) {
 		printf("\n ParseLine - ");
